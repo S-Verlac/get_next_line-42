@@ -6,14 +6,14 @@
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 20:46:18 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/02 19:19:55 by mbachar          ###   ########.fr       */
+/*   Updated: 2022/12/03 16:27:32 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE	5
+#  define BUFFER_SIZE	1
 # endif
 
 # include <unistd.h>

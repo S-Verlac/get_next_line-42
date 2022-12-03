@@ -6,7 +6,7 @@
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 22:39:35 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/02 19:55:42 by mbachar          ###   ########.fr       */
+/*   Updated: 2022/12/03 16:25:56 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	*ft_extract_line(char *stash)
 		return (NULL);
 	i = 0;
 	while (stash[i] != '\n' && stash[i] != '\0')
-		line[i++] = stash[i++];
+	{
+		line[i] = stash[i];
+		i++;
+	}
 	if (stash[i] == '\n')
 		line[i++] = '\n';
 	line[i] = '\0';
@@ -50,9 +53,13 @@ char	*ft_store(char *stash)
 	if (stash[i] == '\n')
 		i++;
 	while (stash[i] != '\0')
-		next_data[j++] = stash[i++];
+	{
+		next_data[j] = stash[i];
+		i++;
+		j++;
+	}
 	next_data[j] = '\0';
-	return (free(stash), next_data);
+	return (next_data);
 }
 
 char	*ft_read(int fd, char *stash)
@@ -63,6 +70,9 @@ char	*ft_read(int fd, char *stash)
 	i = 1;
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
+		return (NULL);
+	stash = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!stash)
 		return (NULL);
 	while (i != 0 && (ft_strchr(buff, '\n') == 0))
 	{
@@ -88,4 +98,18 @@ char	*get_next_line(int fd)
 	line = ft_extract_line(stash);
 	stash = ft_store(stash);
 	return (line);
+}
+
+int	main(void)
+{
+	char	*str;
+	int		fd;
+
+	fd = open("file.txt", O_RDONLY);
+	while (str)
+	{
+		str = get_next_line(fd);
+		printf("%s", str);
+	}
+	// system("leaks a.out");
 }
