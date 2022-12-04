@@ -6,7 +6,7 @@
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 22:39:35 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/03 16:25:56 by mbachar          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:17:34 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_store(char *stash)
 	j = 0;
 	while (stash[i] != '\0' && stash[i] != '\n')
 		i++;
-	if (stash[i] == 0) // Check if it does fix the SEGFAULT
+	if (stash[i] == 0)
 		return (free(stash), NULL);
 	next_data = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!next_data)
@@ -61,7 +61,7 @@ char	*ft_store(char *stash)
 		j++;
 	}
 	next_data[j] = '\0';
-	return (free(stash), next_data); // Added free(stash), check if it fixes SEGFAULT too
+	return (free(stash), next_data);
 }
 
 char	*ft_read(int fd, char *stash)
@@ -73,9 +73,6 @@ char	*ft_read(int fd, char *stash)
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	//stash = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	//if (!stash)
-	//	return (NULL);
 	while (i != 0 && (ft_strchr(buff, '\n') == 0))
 	{
 		i = read(fd, buff, BUFFER_SIZE);
@@ -100,18 +97,4 @@ char	*get_next_line(int fd)
 	line = ft_extract_line(stash);
 	stash = ft_store(stash);
 	return (line);
-}
-
-int	main(void)
-{
-	char	*str;
-	int		fd;
-
-	fd = open("file.txt", O_RDONLY);
-	while (str)
-	{
-		str = get_next_line(fd);
-		printf("%s", str);
-	}
-	// system("leaks a.out");
 }

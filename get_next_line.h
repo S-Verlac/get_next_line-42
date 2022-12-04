@@ -6,7 +6,7 @@
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 20:46:18 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/03 16:27:32 by mbachar          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:17:40 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-int		ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strchr(char *s, int c);
+size_t	ft_strlen(char *str);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif
