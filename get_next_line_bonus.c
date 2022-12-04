@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 22:39:35 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/04 19:00:08 by mbachar          ###   ########.fr       */
+/*   Created: 2022/12/04 19:01:34 by mbachar           #+#    #+#             */
+/*   Updated: 2022/12/04 19:14:19 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_extract_line(char *stash)
 {
@@ -88,15 +88,15 @@ char	*ft_read(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[OPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (0);
-	stash = ft_read(fd, stash);
-	if (!stash)
+	stash[fd] = ft_read(fd, stash[fd]);
+	if (!stash[fd])
 		return (NULL);
-	line = ft_extract_line(stash);
-	stash = ft_store(stash);
+	line = ft_extract_line(stash[fd]);
+	stash[fd] = ft_store(stash[fd]);
 	return (line);
 }

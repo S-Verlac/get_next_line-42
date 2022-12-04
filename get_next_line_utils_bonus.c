@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbachar <mbachar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 22:41:06 by mbachar           #+#    #+#             */
-/*   Updated: 2022/12/04 19:13:03 by mbachar          ###   ########.fr       */
+/*   Created: 2022/12/04 19:01:29 by mbachar           #+#    #+#             */
+/*   Updated: 2022/12/04 19:12:50 by mbachar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -77,7 +77,7 @@ char	*ft_strdup(char *s1)
 	new = malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!new)
 		return (NULL);
-	while (s1[i])
+	while (s1[i] != '\0')
 	{
 		new[i] = s1[i];
 		i++;
