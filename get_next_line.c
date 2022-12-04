@@ -45,8 +45,10 @@ char	*ft_store(char *stash)
 
 	i = 0;
 	j = 0;
-	while (stash[i] != '\n')
+	while (stash[i] != '\0' && stash[i] != '\n')
 		i++;
+	if (stash[i] == 0) // Check if it does fix the SEGFAULT
+		return (free(stash), NULL);
 	next_data = malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!next_data)
 		return (NULL);
@@ -59,7 +61,7 @@ char	*ft_store(char *stash)
 		j++;
 	}
 	next_data[j] = '\0';
-	return (next_data);
+	return (free(stash), next_data); // Added free(stash), check if it fixes SEGFAULT too
 }
 
 char	*ft_read(int fd, char *stash)
@@ -71,9 +73,9 @@ char	*ft_read(int fd, char *stash)
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	stash = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!stash)
-		return (NULL);
+	//stash = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	//if (!stash)
+	//	return (NULL);
 	while (i != 0 && (ft_strchr(buff, '\n') == 0))
 	{
 		i = read(fd, buff, BUFFER_SIZE);
